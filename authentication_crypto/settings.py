@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-STATIC_ROOT = '/static/'
+STATIC_ROOT = './static/'
 
 #Login url's
 LOGIN_URL = '/login/'
