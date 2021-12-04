@@ -1,40 +1,7 @@
 window.addEventListener("load", function(){
     var textPasswordHelp = document.getElementById('passwordsHelp');
-    var password1 = document.getElementById('id_contraseña');
-    var password2 = document.getElementById('id_confirmarContra');
-
-    var username = document.getElementById('id_username');
-    var textUsernameHelp = document.getElementById('usernameHelp');
-    var userIsValid = false;
-
-    username.addEventListener('keyup', function(e) {
-        if(username.value.length > 0){
-            var usernameValue = username.value;
-            $.ajax({
-                url: '/validateuser/',
-                data: {'username': usernameValue, csrfmiddlewaretoken: window.CSRF_TOKEN},
-                type: 'POST',
-                success: function(data) {
-                    var response = JSON.parse(data);
-                    console.log(response.valido);
-                    if (response.valido == true) {
-                        // console.log("Usuario valido");
-                        textUsernameHelp.style.display = "none";
-                        userIsValid = true;
-                    } else {
-                        // console.log("Usuario invalido");
-                        textUsernameHelp.innerHTML = "El usuario " + usernameValue + " ya esta en uso :C";
-                        textUsernameHelp.style.display = "block";
-                        userIsValid = false;
-                    }
-                }
-            })         
-        }
-        else{
-            userIsValid = false;
-            textUsernameHelp.style.display = "none";
-        }
-    });    
+    var password1 = document.getElementById('id_new_password1');
+    var password2 = document.getElementById('id_new_password2');
 
     password1.addEventListener('keyup', function(e) {
         if(password1.value.length === 8){      
@@ -79,13 +46,12 @@ window.addEventListener("load", function(){
 
     });
 
-    var form = document.getElementById('form_register');
+    var form = document.getElementById('form_set_new_password');
     form.addEventListener('submit', function(evento) {
         evento.preventDefault();
 
         // alert("Enviando");
-        console.log("CONSULTA01: "  + userIsValid);
-        if(aseguraPassword() && userIsValid){
+        if(aseguraPassword()){
 
             // Obtenemos hash (viene como un hexadecimal 32 bytes)
             hash = CryptoJS.MD5(password1.value);
@@ -95,11 +61,8 @@ window.addEventListener("load", function(){
             console.log(result.length);      
             
             password1.value = result;
-            console.log("CONSULTA02: "  + userIsValid);
-            if(userIsValid){
-                // alert("Usuario valido");
-                this.submit();
-            }
+            password2.value = result;
+            this.submit();
         }
 
     });

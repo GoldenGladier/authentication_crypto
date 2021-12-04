@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-v%cw&xl6%!!5k$6o0448@=##1t&9^=s&&z8b3v22#dq+04+j5j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://omaraguirre.pythonanywhere.com/', 'omaraguirre.pythonanywhere.com']
+# ALLOWED_HOSTS = ['https://omaraguirre.pythonanywhere.com/', 'omaraguirre.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -123,7 +124,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-STATIC_ROOT = '/home/OmarAguirre/authentication_crypto/static_files/'
+STATIC_ROOT = '/home/OmarAguirre/authentication_crypto/static/'
                 
 
 #Login url's
@@ -133,6 +134,15 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = "users.Profile"
 
+# Email
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_Host = 'smtp.gmail.com'
+EMAIL_Host_USER = 'doncelomar@gmail.com'
+EMAIL_Host_PASSWORD = 'H0MER0poter'
+EMAIL_PORT = 587
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

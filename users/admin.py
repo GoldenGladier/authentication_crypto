@@ -4,6 +4,6 @@ from .models import Profile
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'correo', 'contraseña')
+    list_display = ('pk','username', 'correo', 'contraseña')
 
 admin.site.register(Profile, ProfileAdmin)    
