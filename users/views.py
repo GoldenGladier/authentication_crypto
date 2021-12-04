@@ -54,6 +54,7 @@ def password_reset_request(request):
                         message = MIMEMultipart('Foobar')
 
                         # epos_liggaam['Subject'] = 'Foobar'
+                        message['Subject'] = "Solicitud de restablecimiento de contraseña."
 
                         message['From'] = from_address
 
@@ -71,7 +72,7 @@ def password_reset_request(request):
                         mail.starttls()
                         try: 
                             mail.login(from_address, 'H0MER0poter')
-                            mail.sendmail("Password Reset Requested", from_address,to_address, message.as_string())
+                            mail.sendmail(from_address,to_address, message.as_string())
                             mail.close()  
                         except BadHeaderError: 
                             return HttpResponse('Invalid header found.') 
