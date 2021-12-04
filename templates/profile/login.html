@@ -1,0 +1,38 @@
+{% extends 'base/master.html' %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+
+    {% load static %}
+    <script src="{% static 'js/login.js' %}" ></script>
+{% endblock %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<h1>Login</h1>
+<div class=container>
+    <div class="card mt-5">
+        <div class="card-body">
+            <form method="POST" id="form_login">
+                {% csrf_token %}
+                {{ form }}
+
+                <!-- <label for="id_usuario">Usuario:</label><input type="text" name="usuario" maxlength="25" required="" id="id_usuario">
+                <label for="id_contraseña">Contraseña:</label>
+                
+                <input type="password" name="contraseñaAux" class="form-control" autocomplete="off" maxlength="8" minlength="8" required="" id="id_contraseña_aux">
+                
+                <input style="display: none;" type="password" name="contraseña" class="form-control" autocomplete="off" maxlength="8" minlength="8" id="id_contraseña"> -->
+
+                <button class="btn btn-primary mt-4">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

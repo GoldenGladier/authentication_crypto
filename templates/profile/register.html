@@ -1,0 +1,48 @@
+{% extends 'base/master.html' %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <!-- AJAX/JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    
+    {% load static %}
+    <script src="{% static 'js/register.js' %}" ></script>
+{% endblock %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+
+<h1>Login</h1>
+<div class=container>
+    <div class="card mt-5">
+        <div class="card-body">
+            <form method="POST" id="form_register">{% csrf_token %}
+   
+                <p></p>
+                <label for="id_nombre">Nombre:</label><input type="text" name="nombre" class="form-control" autocomplete="off" required="" id="id_nombre">
+                <label for="id_apellido">Apellido:</label><input type="text" name="apellido" class="form-control" autocomplete="off" required="" id="id_apellido">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" class="form-control" autocomplete="off" required="" id="id_username">
+                <p style="display:none;" id="usernameHelp" class="form-text">Username invalido</p>
+
+                <label for="id_email">Email:</label><input type="email" name="email" class="form-control" autocomplete="off" required="" id="id_email">
+               
+                <label for="id_contraseña">Contraseña:</label>
+                <input type="password" oncopy="return false" onpaste="return false" name="contraseña" class="form-control" autocomplete="off" maxlength="8" minlength="8" required="" id="id_contraseña">
+                <label for="id_confirmarContra">Confirmar contraseña:</label>
+                <input type="password" oncopy="return false" onpaste="return false" name="confirmarContra" class="form-control" autocomplete="off" maxlength="8" minlength="8" required="" id="id_confirmarContra">
+                <p id="passwordsHelp" class="form-text">La contraseña debe tener 8 caracteres</p>
+                <!-- {{ form }} -->
+                <button type="submit" class="btn btn-primary mt-4">Registrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
