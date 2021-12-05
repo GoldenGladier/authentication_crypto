@@ -54,13 +54,13 @@ class CustomSetPasswordForm(SetPasswordForm):
         'password_notvalid': ("Password must of 8 Character which contain alphanumeric with atleast 1 special charater and 1 uppercase."),
     }
     new_password1 = forms.CharField(
-        label=("New password"),
+        label=("Nueva Contraseña"),
         widget=forms.PasswordInput,
         # strip=False,
         # help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label=("New password confirmation"),
+        label=("Confirmar nueva contraseña"),
         # strip=False,
         widget=forms.PasswordInput,
     )
