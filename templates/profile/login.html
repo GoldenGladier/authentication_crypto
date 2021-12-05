@@ -1,5 +1,9 @@
 {% extends 'base/master.html' %}
 
+{% block scriptsTop %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+{% endblock %}
+
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
@@ -9,29 +13,47 @@
 {% endblock %}
 
 {% block title %}
-Login
+.:INGRESAR A MI CUENTA:.
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<body background="{% static 'imagenes/background5.jpg' %}">
 {% endblock %}
 
 {% block content %}
 
-<h1>Login</h1>
-<div class=container>
-    <div class="card mt-5">
-        <div class="card-body">
-            <form method="POST" id="form_login">
-                {% csrf_token %}
-                {{ form }}
+<h1 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: white; text-align: center;">Ingresar a mi cuenta</h1>
 
-                <!-- <label for="id_usuario">Usuario:</label><input type="text" name="usuario" maxlength="25" required="" id="id_usuario">
-                <label for="id_contraseña">Contraseña:</label>
-                
-                <input type="password" name="contraseñaAux" class="form-control" autocomplete="off" maxlength="8" minlength="8" required="" id="id_contraseña_aux">
-                
-                <input style="display: none;" type="password" name="contraseña" class="form-control" autocomplete="off" maxlength="8" minlength="8" id="id_contraseña"> -->
 
-                <button class="btn btn-primary mt-4">Guardar</button>
-            </form>
-        </div>
+
+<p style="color: white; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">Por favor proporcionanos los siguientes datos: </p>
+<div class="section container">
+    <div class="row card-panel" style="background-color: #FFFFFF; border-radius: 30px;">
+        {% if form_errors %}
+        <p class="form-text link-danger">{{ form_errors }}</p>
+        {% endif %}             
+        <form method="POST" id="form_login">
+            {% csrf_token %}
+            {{ form }}
+
+            <!-- NO FUNCIONA CON EL HTML -- DEJAR EL FORM DE DJANGO -->
+
+            <!-- <label for="id_usuario">Usuario:</label><input type="text" name="usuario" maxlength="25" required="" id="id_usuario">
+            <label for="id_contraseña">Contraseña:</label>
+            
+            <input type="password" name="contraseñaAux" class="form-control" autocomplete="off" maxlength="8" minlength="8" required="" id="id_contraseña_aux">
+            
+            <input style="display: none;" type="password" name="contraseña" class="form-control" autocomplete="off" maxlength="8" minlength="8" id="id_contraseña"> -->
+
+            <div ALIGN="center">
+                <button type="submit" class="btn btn-primary mt-4" style="background-color: blueviolet;">Ingresar</button>
+            </div>
+            <br>
+            <center>
+                <a href="{% url 'password_reset' %}" class="link-secondary" style="margin: auto; text-decoration: underline; color:blueviolet;">Olvide mi contraseña</a>
+            </center>            
+        </form>
     </div>
 </div>
 

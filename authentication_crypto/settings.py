@@ -120,17 +120,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
 STATIC_ROOT = '/home/OmarAguirre/authentication_crypto/static/'
                 
 
 #Login url's
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/welcome/'
 
 AUTH_USER_MODEL = "users.Profile"
 
@@ -140,8 +144,8 @@ AUTH_USER_MODEL = "users.Profile"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_Host = 'smtp.gmail.com'
-# EMAIL_Host_USER = 'doncelomar@gmail.com'
-# EMAIL_Host_PASSWORD = 'H0MER0poter'
+# EMAIL_Host_USER = 'anonymus@gmail.com'
+# EMAIL_Host_PASSWORD = '********'
 EMAIL_PORT = 587
 
 # Default primary key field type

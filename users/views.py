@@ -135,6 +135,12 @@ def login_view(request):
                     return redirect(reverse('home-view'))
         else:
             print("Formulario (form) login invalido")
+            form = UserForm()
+            context = {
+                'form_errors': "El usuario o contraseña es incorrecto",
+                'form': form,
+            }
+            return render(request, 'profile/login.html', context)
     else:
         form = UserForm()
     return render(request, 'profile/login.html', {'form': form})
@@ -180,10 +186,14 @@ def home_view(request):
     if request.method == 'GET':
         return render(request, 'page/home.html')    
 
+def welcome_view(request):
+    if request.method == 'GET':
+        return render(request, 'page/welcome.html')    
+
 @login_required
 def logout_view(request):
     logout(request)
-    return redirect(reverse('login-view'))
+    return redirect(reverse('welcome-view'))
 
 import json
 from django.http import HttpResponse

@@ -9,12 +9,16 @@ class UserForm(forms.Form):
                                     # , widget=forms.PasswordInput()
     # contraseña = forms.CharField(min_length=8, max_length=16)
     contraseña_aux = forms.CharField(min_length=8, max_length=8, label='Contraseña', error_messages={'Contraseña invalida': 'La contraseña debe tener mínimo 8 caracteres.'}, widget=forms.PasswordInput(attrs={'class':'form-control', 'autocomplete':'off'}), required=True)    
-    contraseña = forms.CharField(min_length=8, max_length=16, label='', error_messages={'Contraseña invalida': 'La contraseña debe tener mínimo 8 caracteres.'}, widget=forms.PasswordInput(attrs={'class':'form-control aux', 'autocomplete':'off', 'style':'display:none;', 'maxlength':'8'}), required=False )    
+    contraseña = forms.CharField(min_length=8, max_length=16, label='', error_messages={'Contraseña invalida': 'La contraseña debe tener mínimo 8 caracteres.'}, widget=forms.PasswordInput(attrs={'class':'form-control aux', 'autocomplete':'off', 'style':'display:none;'}), required=False )    
 
     def clean(self):
         username = self.cleaned_data.get('usuario')
         password = self.cleaned_data.get('contraseña')
         user_username = Profile.objects.filter(username=username).exists()
+        if user_username:
+            user_aux =  Profile.objects.get(username=username)
+            print(str(user_username) +' - ' + str(password) + ' - ' + str(user_aux.contraseña))
+
         print(str(user_username) +' - ' + str(password))
         if not username:
             print('El usuario no existe!!!')
@@ -26,7 +30,8 @@ class UserForm(forms.Form):
             else:
                 raise forms.ValidationError('¡La contraseña es incorrecta!')
                 print('El usuario no existe!!!')
-        
+        print('largo: ' + str(len(password)))
+        print(str(self.cleaned_data))
         return self.cleaned_data
 
 class RegisterForm(forms.Form):

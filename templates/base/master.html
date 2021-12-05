@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width", initial-scale="1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    {% block scriptsTop %}
+    {% endblock %}
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
     
+    <!-- Import -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
     
     <title>
@@ -13,23 +23,94 @@
         {% endblock %}
     </title>
 </head>
+{% block body %}
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+{% endblock %}
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'register-view' %}">Aplicacion Emilly/Omar {% if user.is_authenticated %}Usuario: {{ request.user }}{% endif %}</a>                
         </div>
-    </nav>
-    <div class='container'>
+    </nav> -->
+
+<!-- NAVIGATION -->
+<nav style="background-color: #7884E3;" role="navigation">
+    <div class="nav-wrapper container">
+      <div id="logo-container" class="brand-logo">
+        {% load static %}
+        <img src="{% static 'imagenes/logoESCOMBlanco.jpg' %}" alt="Logo ESCOM" style="display: block; padding: 5px;">
+      </div>
+
+      {% if user.is_authenticated %}
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{% url 'home-view' %}" style="color: aliceblue;">Home</a></li>
+            <li style="color: aliceblue;">Usuario: {{ request.user }}</li>
+            <li><a href="{% url 'logout-view' %}" style="color: aliceblue;">Cerrar sesión</a></li>
+        </ul>        
+      {% else %}       
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{% url 'welcome-view' %}" style="color: aliceblue;">Welcome</a></li>
+            <li><a href="{% url 'login-view' %}" style="color: aliceblue;">Inicia sesión</a></li>
+            <li><a href="{% url 'register-view' %}" style="color: aliceblue;">Crear cuenta</a></li>
+        </ul>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="{% url 'home-view' %}" style="color: aliceblue;">Home</a></li>
+        <li style="color: aliceblue;">Usuario: {{ request.user }}</li>
+        <li><a href="{% url 'logout-view' %}" style="color: aliceblue;">Cerrar sesión</a></li>
+      </ul>
+      {% else %}    
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="{% url 'welcome-view' %}" style="color: aliceblue;">Welcome</a></li>
+        <li><a href="{% url 'login-view' %}" style="color: aliceblue;">Inicia sesión</a></li>
+        <li><a href="{% url 'register-view' %}" style="color: aliceblue;">Crear cuenta</a></li>
+      </ul>
+      {% endif %}      
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons" style="color:white;">menu</i></a>
+    </div>
+  </nav>   
+
+    <div style="min-height: 65vh;">
         {% block content %}
         {% endblock %}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <footer class="page-footer" style="background-color: #006D82; margin-bottom: 0;">
+        <div class="container">
+          <div class="row" style="margin-bottom: 0;">
+            <div class="col l6 s12">
+              <h5 class="white-text">Practica Cryptography</h5>
+              <h5 class="white-text">Control de Acceso</h5>
+              <!-- <p class="grey-text text-lighten-4">.</p> -->
+    
+    
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Contactanos</h5>
+              <ul>
+                <li><a class="white-text" href="https://omaraguirre-portfolioweb.web.app/#/">Página web Omar Aguirre</a></li>
+                <li><a class="white-text" href="https://sites.google.com/view/emillie-pf/home">Página web Emillie Pérez</a></li>
+                <br>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </footer>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    
+    <!-- <script src="{% static 'js/login.js' %}" ></script> -->
+    {% load static %}
+    <script src="{% static 'js/materialize.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>      
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> -->
 
     {% block scripts %}
     {% endblock %}
 
-    <script type="text/javascript">
-
-    </script>    
 </body>
 </html>

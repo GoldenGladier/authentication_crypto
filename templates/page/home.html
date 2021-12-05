@@ -1,13 +1,61 @@
 {% extends 'base/master.html' %}
 
 {% block title %}
-Home
+.:BIENVENIDO:.
 {% endblock %}
 
 {% block content %}
 
-<div class=container>
-    <h1>Home</h1> 
+<div>
+    <div id="index-banner" class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br><br>
+          <h1 class="header left-align" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color:white">Bienvenido</h1>
+          <div class="row center">
+            <h5 class="header col s12 left-align" style="color: white;">Ya ingresaste a tu cuenta</h5>
+          </div>
+          <br><br>
+    
+          </div>
+        </div>
+        {% load static %}
+        <div class="parallax"><img src="{% static 'imagenes/background4.jpg' %}" alt="Unsplashed background img 1"></div>
+      </div>    
+    
+  <!--Carrusel-->
+  <h3 style="text-align: center; color: #7884E3; font-family: Verdana, Geneva, Tahoma, sans-serif;">Tenemos estas novedades:</h3>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <p style="text-align: center; color: #7884E3; font-family: Verdana, Geneva, Tahoma, sans-serif;">Conoce a algunas de las analistas de cifrados más importantes:</p>
+  <div class="carousel">
+    {% load static %}
+    <a class="carousel-item" href="#one!"><img src="{% static 'imagenes/carrusel/Ada_Lovelace.jpg' %}"></a>
+    <a class="carousel-item" href="#two!"><img src="{% static 'imagenes/carrusel/Agnes-Meyer.jpeg' %}"></a>
+    <a class="carousel-item" href="#three!"><img src="{% static 'imagenes/carrusel/Julia-Parsons.jpg' %}"></a>
+    <a class="carousel-item" href="#four!"><img src="{% static 'imagenes/carrusel/Mavis-Batey.jpg' %}"></a>
+  </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
+  <!--  Scripts-->
+  <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../js/materialize.js"></script>
+  <script src="../js/init.js"></script> -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <script>
+      var elem = document.querySelector('.carousel');
+        var instance = M.Carousel.init(elem,{
+            indicators: true,
+            duration: 400,
+        });
+
+        setInterval(()=>{
+        console.log(instance.pressed);
+        if(!instance.pressed){
+            instance.next();
+        }
+        },2000)
+  </script>
 {% endblock %}
